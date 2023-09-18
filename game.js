@@ -84,19 +84,55 @@ function startPlayerMovement() {
 
 function checkWinCond(player) {
   winCond = 0;
-  //check 4 in a row
   for (r = 1; r <= 6; r++) {
     for (c = 1; c <= 7; c++) {
       let rowTile = document.getElementById(r + "," + c);
       if (rowTile.className == player) {
         winCond++;
-        if (winCond == 4) {
+        //check 4 horizontal
+        for (i = 1; i < 4; i++) {
+          rowTile = document.getElementById(r + "," + (c + i));
+          if (rowTile != null && rowTile.className == player) {
+            winCond++;
+          }
+        }
+        if (winCond >= 4) {
           //player wins
-          console.log(player + "Wins!");
+          console.log(player + " Wins!");
+        } else {
+          winCond = 1;
+        }
+        //check vertical
+        for (i = 1; i < 4; i++) {
+          rowTile = document.getElementById(r - i + "," + c);
+          if (rowTile != null && rowTile.className == player) {
+            winCond++;
+          }
+        }
+        if (winCond >= 4) {
+          //player wins
+          console.log(player + " Wins!");
+        } else {
+          winCond = 0;
         }
       }
     }
   }
+  /*for (r = 1; r <= 6; r++) {
+    for (c = 1; c <= 7; c++) {
+      let rowTile = document.getElementById(r + "," + c);
+      dia1 = document.getElementById(r - 1 + "," + (c + 1));
+      if (dia1 != null && dia1 == player) {
+        dia2 = document.getElementById(r - 2 + "," + (c + 2));
+        if (dia2 != null && dia2 == player) {
+          dia3 = document.getElementById(r - 3 + "," + (c + 3));
+          if (dia3 != null && dia3 == player) {
+            console.log(player + " Wins!");
+          }
+        }
+      }
+    }
+  }*/
 }
 
 startPlayerMovement();
