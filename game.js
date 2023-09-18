@@ -1,5 +1,10 @@
+let player1 = "red";
+let player2 = "black";
+let currentPlayer = player1;
+let lengthCol;
 //set up the board
 function makeBoard(row, column) {
+  lengthCol = [6, 6, 6, 6, 6, 6, 6];
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -8,6 +13,7 @@ function makeBoard(row, column) {
     for (c = 1; c <= column; c++) {
       let newCols = document.createElement("td");
       newCols.setAttribute("id", r + "," + c);
+      newCols.addEventListener("click", placeTile1);
       newRows.appendChild(newCols);
     }
   }
@@ -15,6 +21,29 @@ function makeBoard(row, column) {
 }
 
 makeBoard(6, 7);
+function placeTile1() {
+  let position = this.id.split(",");
+  let r = parseInt(position[0]);
+  let c = parseInt(position[1]);
+  r = lengthCol[c];
+  if (r == 0) {
+    return;
+  }
+  let tile = document.getElementById(r + "," + c);
+  if (currentPlayer == player1) {
+    tile.style.backgroundColor = player1;
+    tile.classList.add("player1");
+    currentPlayer = player2;
+  } else {
+    tile.style.backgroundColor = player2;
+    tile.classList.add("player2");
+    currentPlayer = player1;
+  }
+  r--;
+  lengthCol[c] = r;
+  checkWinCond(player1);
+  checkWinCond(player2);
+}
 
 function placeTile(x, y, color, player) {
   for (let r = 6; r >= 1; r--) {
