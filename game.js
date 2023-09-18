@@ -128,7 +128,7 @@ function checkWinCond(player) {
 //check horizontal
 function checkHori(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 4; i++) {
+  for (i = 1; i < 3; i++) {
     rowTile = document.getElementById(r + "," + (c + i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -140,7 +140,7 @@ function checkHori(r, c, rowTile, player) {
 //check vertical
 function checkVert(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 4; i++) {
+  for (i = 1; i < 3; i++) {
     rowTile = document.getElementById(r - i + "," + c);
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -151,7 +151,7 @@ function checkVert(r, c, rowTile, player) {
 
 function checkDiag1(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 4; i++) {
+  for (i = 1; i < 3; i++) {
     rowTile = document.getElementById(r - i + "," + (c + i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -162,7 +162,7 @@ function checkDiag1(r, c, rowTile, player) {
 
 function checkDiag2(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 4; i++) {
+  for (i = 1; i < 3; i++) {
     rowTile = document.getElementById(r - i + "," + (c - i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -172,7 +172,7 @@ function checkDiag2(r, c, rowTile, player) {
 }
 
 function winOrReset(player) {
-  if (winCond >= 4) {
+  if (winCond >= 3) {
     //player wins
     console.log(player + " Wins!");
   } else {

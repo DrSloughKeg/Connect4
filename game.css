@@ -3,11 +3,9 @@ body {
 }
 
 table {
-  border: solid;
   border-width: 1px;
   margin: 0 auto 0 auto;
-  border-color: rgb(110, 170, 215);
-  background-color: rgb(110, 170, 215);
+  background: linear-gradient(transparent, transparent 85px, rgb(110, 170, 215) 85px);
 }
 
 td {
