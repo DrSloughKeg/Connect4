@@ -16,7 +16,7 @@ function makeBoard(row, column) {
 
 makeBoard(6, 7);
 
-function placeTile(x, y, color) {
+function placeTile(x, y, color, player) {
   for (let r = 6; r >= 1; r--) {
     let rowTile = document.getElementById(r + "," + y);
     if (
@@ -24,6 +24,8 @@ function placeTile(x, y, color) {
       rowTile.style.backgroundColor !== "red"
     ) {
       rowTile.style.backgroundColor = color;
+      rowTile.setAttribute("class", player);
+      checkWinCond(player);
       break;
     }
   }
@@ -43,10 +45,10 @@ function startPlayerMovement() {
     switch (e.keyCode) {
       case 32:
         if (currentPlayer == 1) {
-          placeTile(player1X, player1Y, "black");
+          placeTile(player1X, player1Y, "black", "player1");
           currentPlayer = 2;
         } else {
-          placeTile(player2X, player2Y, "red");
+          placeTile(player2X, player2Y, "red", "player2");
           currentPlayer = 1;
         }
         break;
@@ -78,6 +80,23 @@ function startPlayerMovement() {
         break;
     }
   };
+}
+
+function checkWinCond(player) {
+  winCond = 0;
+  //check 4 in a row
+  for (r = 1; r <= 6; r++) {
+    for (c = 1; c <= 7; c++) {
+      let rowTile = document.getElementById(r + "," + c);
+      if (rowTile.className == player) {
+        winCond++;
+        if (winCond == 4) {
+          //player wins
+          console.log(player + "Wins!");
+        }
+      }
+    }
+  }
 }
 
 startPlayerMovement();
