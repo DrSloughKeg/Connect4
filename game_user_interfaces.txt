@@ -1,0 +1,5 @@
+- create boundaries for the board -michael
+- win condition function - benjamin
+- a new position selector at a top row - michael
+- css to be improved - all of us
+- allow the mouse to select the tile for the player - xing
