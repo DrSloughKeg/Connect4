@@ -88,51 +88,88 @@ function checkWinCond(player) {
     for (c = 1; c <= 7; c++) {
       let rowTile = document.getElementById(r + "," + c);
       if (rowTile.className == player) {
-        winCond++;
-        //check 4 horizontal
-        for (i = 1; i < 4; i++) {
-          rowTile = document.getElementById(r + "," + (c + i));
-          if (rowTile != null && rowTile.className == player) {
-            winCond++;
-          }
+        if (
+          document.getElementById(r + "," + (c + 1)) != null &&
+          document.getElementById(r + "," + (c + 1)) == player
+        ) {
+          checkHori(r, c, rowTile, player);
         }
-        if (winCond >= 4) {
-          //player wins
-          console.log(player + " Wins!");
-        } else {
-          winCond = 1;
+        if (
+          document.getElementById(r - 1 + "," + c) != null &&
+          document.getElementById(r - 1 + "," + c) == player
+        ) {
+          checkVert(r, c, rowTile, player);
         }
-        //check vertical
-        for (i = 1; i < 4; i++) {
-          rowTile = document.getElementById(r - i + "," + c);
-          if (rowTile != null && rowTile.className == player) {
-            winCond++;
-          }
+        if (
+          document.getElementById(r - 1 + "," + (c + 1)) != null &&
+          document.getElementById(r - 1 + "," + (c + 1)) == player
+        ) {
+          checkDiag1(r, c, rowTile, player);
         }
-        if (winCond >= 4) {
-          //player wins
-          console.log(player + " Wins!");
-        } else {
-          winCond = 0;
+        if (
+          document.getElementById(r - 1 + "," + (c - 1)) != null &&
+          document.getElementById(r - 1 + "," + (c - 1)) == player
+        ) {
+          checkDiag2(r, c, rowTile, player);
         }
       }
     }
   }
-  /*for (r = 1; r <= 6; r++) {
-    for (c = 1; c <= 7; c++) {
-      let rowTile = document.getElementById(r + "," + c);
-      dia1 = document.getElementById(r - 1 + "," + (c + 1));
-      if (dia1 != null && dia1 == player) {
-        dia2 = document.getElementById(r - 2 + "," + (c + 2));
-        if (dia2 != null && dia2 == player) {
-          dia3 = document.getElementById(r - 3 + "," + (c + 3));
-          if (dia3 != null && dia3 == player) {
-            console.log(player + " Wins!");
-          }
-        }
-      }
+}
+
+//check horizontal
+function checkHori(r, c, rowTile, player) {
+  winCond++;
+  for (i = 1; i < 4; i++) {
+    rowTile = document.getElementById(r + "," + (c + i));
+    if (rowTile != null && rowTile.className == player) {
+      winCond++;
     }
-  }*/
+  }
+  winOrReset(player);
+}
+
+//check vertical
+function checkVert(r, c, rowTile, player) {
+  winCond++;
+  for (i = 1; i < 4; i++) {
+    rowTile = document.getElementById(r - i + "," + c);
+    if (rowTile != null && rowTile.className == player) {
+      winCond++;
+    }
+  }
+  winOrReset(player);
+}
+
+function checkDiag1(r, c, rowTile, player) {
+  winCond++;
+  for (i = 1; i < 4; i++) {
+    rowTile = document.getElementById(r - i + "," + (c - i));
+    if (rowTile != null && rowTile.className == player) {
+      winCond++;
+    }
+  }
+  winOrReset(player);
+}
+
+function checkDiag2(r, c, rowTile, player) {
+  winCond++;
+  for (i = 1; i < 4; i++) {
+    rowTile = document.getElementById(r - i + "," + (c + i));
+    if (rowTile != null && rowTile.className == player) {
+      winCond++;
+    }
+  }
+  winOrReset(player);
+}
+
+function winOrReset(player) {
+  if (winCond >= 4) {
+    //player wins
+    console.log(player + " Wins!");
+  } else {
+    winCond = 1;
+  }
 }
 
 startPlayerMovement();
