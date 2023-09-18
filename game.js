@@ -90,25 +90,25 @@ function checkWinCond(player) {
       if (rowTile.className == player) {
         if (
           document.getElementById(r + "," + (c + 1)) != null &&
-          document.getElementById(r + "," + (c + 1)) == player
+          document.getElementById(r + "," + (c + 1)).className == player
         ) {
           checkHori(r, c, rowTile, player);
         }
         if (
           document.getElementById(r - 1 + "," + c) != null &&
-          document.getElementById(r - 1 + "," + c) == player
+          document.getElementById(r - 1 + "," + c).className == player
         ) {
           checkVert(r, c, rowTile, player);
         }
         if (
           document.getElementById(r - 1 + "," + (c + 1)) != null &&
-          document.getElementById(r - 1 + "," + (c + 1)) == player
+          document.getElementById(r - 1 + "," + (c + 1)).className == player
         ) {
           checkDiag1(r, c, rowTile, player);
         }
         if (
           document.getElementById(r - 1 + "," + (c - 1)) != null &&
-          document.getElementById(r - 1 + "," + (c - 1)) == player
+          document.getElementById(r - 1 + "," + (c - 1)).className == player
         ) {
           checkDiag2(r, c, rowTile, player);
         }
@@ -144,7 +144,7 @@ function checkVert(r, c, rowTile, player) {
 function checkDiag1(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 4; i++) {
-    rowTile = document.getElementById(r - i + "," + (c - i));
+    rowTile = document.getElementById(r - i + "," + (c + i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
     }
@@ -155,7 +155,7 @@ function checkDiag1(r, c, rowTile, player) {
 function checkDiag2(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 4; i++) {
-    rowTile = document.getElementById(r - i + "," + (c + i));
+    rowTile = document.getElementById(r - i + "," + (c - i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
     }
@@ -168,7 +168,7 @@ function winOrReset(player) {
     //player wins
     console.log(player + " Wins!");
   } else {
-    winCond = 1;
+    winCond = 0;
   }
 }
 
