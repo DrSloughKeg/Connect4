@@ -4,7 +4,7 @@ let currentPlayer = player1;
 let lengthCol;
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6]; // how many tiles can fill in the columns
+  lengthCol = [6, 6, 6, 6, 6, 6, 6];
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -20,7 +20,7 @@ function makeBoard(row, column) {
   document.querySelector("body").appendChild(newTable);
 }
 
-makeBoard(6, 7);
+makeBoard(7, 7);
 
 function placeTile1() {
   let position = this.id.split(",");
@@ -30,7 +30,7 @@ function placeTile1() {
   if (r == 0) {
     return;
   }
-  let tile = document.getElementById(r + "," + c);
+  let tile = document.getElementById(r + 1 + "," + c);
   if (currentPlayer == player1) {
     tile.style.backgroundColor = player1;
     tile.classList.add(player1);
