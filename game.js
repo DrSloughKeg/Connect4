@@ -207,4 +207,3 @@ function winOrReset(player) {
 }
 
 // startPlayerMovement();
-placeTile1();
