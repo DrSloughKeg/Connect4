@@ -1,54 +1,28 @@
-let player1 = "black";
-let player2 = "red";
+let player1 = "red";
+let player2 = "black";
 let currentPlayer = player1;
 let lengthCol;
-
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6]; //Mouse
+  lengthCol = [6, 6, 6, 6, 6, 6, 6];
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
     let newRows = document.createElement("tr");
-    if (r === 1) {
-      // Add a class to the first row
-      newRows.classList.add("ignoreCSSRow");
-    }
     newTable.appendChild(newRows);
     for (c = 1; c <= column; c++) {
       let newCols = document.createElement("td");
       newCols.setAttribute("id", r + "," + c);
-      newCols.addEventListener("click", placeTile1); //Mouse
+      newCols.addEventListener("click", placeTile1);
       newRows.appendChild(newCols);
     }
   }
   document.querySelector("body").appendChild(newTable);
 }
 
-//set up
-let display = document.createElement("h2");
-let displayTxt = document.createTextNode("");
-display.appendChild(displayTxt);
-document.getElementById("display").appendChild(display);
-makeBoard(7, 7);
-
-function placeTile(x, y, color, player) {
-  for (let r = 7; r >= 1; r--) {
-    let rowTile = document.getElementById(r + "," + y);
-    if (
-      rowTile.style.backgroundColor !== "black" &&
-      rowTile.style.backgroundColor !== "red"
-    ) {
-      rowTile.style.backgroundColor = color;
-      rowTile.setAttribute("class", player);
-      checkWinCond(player);
-      break;
-    }
-  }
-}
+makeBoard(6, 7);
 
 function placeTile1() {
-  //Mouse
   let position = this.id.split(",");
   let r = parseInt(position[0]);
   let c = parseInt(position[1]);
@@ -59,14 +33,16 @@ function placeTile1() {
   let tile = document.getElementById(r + "," + c);
   if (currentPlayer == player1) {
     tile.style.backgroundColor = player1;
-    tile.classList.add("player1");
-    checkWinCond("player1");
+    tile.classList.add(player1);
     currentPlayer = player2;
+    let turn = document.getElementById("turn");
+    turn.innerHTML = " turn :" + currentPlayer;
   } else {
     tile.style.backgroundColor = player2;
-    tile.classList.add("player2");
-    checkWinCond("player2");
+    tile.classList.add(player2);
     currentPlayer = player1;
+    let turn = document.getElementById("turn");
+    turn.innerHTML = " turn :" + currentPlayer;
   }
   r--;
   lengthCol[c - 1] = r;
@@ -98,61 +74,56 @@ function tieCondition() {
 //   }
 // }
 
-function startPlayerMovement() {
-  // Setting Both player 1 and 2 at the first tile (1,1)
-  let player1Tile = document.getElementById("1,1");
-  let player2Tile = document.getElementById("1,1");
-  let player1R = 1;
-  let player1C = 1;
-  let player2R = 1;
-  let player2C = 1;
-  player1Tile.style.backgroundColor = "black"; // Player 1 is black & Player 2 is red
-  let currentPlayer = 1; // player 1 starts
-
-  document.onkeydown = function (e) {
-    switch (e.keyCode) {
-      case 32: // When Space bar is pressed
-        if (currentPlayer == 1) {
-          placeTile(player1R, player1C, "black", "player1");
-          player1Tile.style.backgroundColor = "white";
-          currentPlayer = 2;
-        } else {
-          placeTile(player2R, player2C, "red", "player2");
-          player2Tile.style.backgroundColor = "white";
-          currentPlayer = 1;
-        }
-        break;
-      case 37: // When left arrow is pressed
-        if (currentPlayer == 1 && player1C > 1) {
-          // (&& PLayer1C > 1) sets the boundary to the board.
-          player1Tile.style.backgroundColor = "white";
-          player1C--;
-          player1Tile = document.getElementById(player1R + "," + player1C);
-          player1Tile.style.backgroundColor = "black";
-        } else if (currentPlayer == 2 && player2C > 1) {
-          player2Tile.style.backgroundColor = "white";
-          player2C--;
-          player2Tile = document.getElementById(player2R + "," + player2C);
-          player2Tile.style.backgroundColor = "red";
-        }
-        break;
-      case 39: // When Right arrow is pressed
-        if (currentPlayer == 1 && player1C < 7) {
-          player1Tile.style.backgroundColor = "white";
-          player1C++;
-          player1Tile = document.getElementById(player1R + "," + player1C);
-          player1Tile.style.backgroundColor = "black";
-        } else if (currentPlayer == 2 && player2C < 7) {
-          player2Tile.style.backgroundColor = "white";
-          player2C++;
-          player2Tile = document.getElementById(player2R + "," + player2C);
-          player2Tile.style.backgroundColor = "red";
-        }
-        break;
-    }
-  };
-}
-
+// function startPlayerMovement() {
+//   let player1Tile = document.getElementById("1,1");
+//   let player2Tile = document.getElementById("1,1");
+//   let player1X = 1;
+//   let player1Y = 1;
+//   let player2X = 1;
+//   let player2Y = 1;
+//   player1Tile.style.backgroundColor = "black";
+//   player2Tile.style.backgroundColor = "red";
+//   let currentPlayer = 1;
+//   document.onkeydown = function (e) {
+//     switch (e.keyCode) {
+//       case 32:
+//         if (currentPlayer == 1) {
+//           placeTile(player1X, player1Y, "black", "player1");
+//           currentPlayer = 2;
+//         } else {
+//           placeTile(player2X, player2Y, "red", "player2");
+//           currentPlayer = 1;
+//         }
+//         break;
+//       case 37:
+//         if (currentPlayer == 1) {
+//           player1Tile.style.backgroundColor = "white";
+//           player1Y--;
+//           player1Tile = document.getElementById(player1X + "," + player1Y);
+//           player1Tile.style.backgroundColor = "black";
+//         } else {
+//           player2Tile.style.backgroundColor = "white";
+//           player2Y--;
+//           player2Tile = document.getElementById(player2X + "," + player2Y);
+//           player2Tile.style.backgroundColor = "red";
+//         }
+//         break;
+//       case 39:
+//         if (currentPlayer == 1) {
+//           player1Tile.style.backgroundColor = "white";
+//           player1Y++;
+//           player1Tile = document.getElementById(player1X + "," + player1Y);
+//           player1Tile.style.backgroundColor = "black";
+//         } else {
+//           player2Tile.style.backgroundColor = "white";
+//           player2Y++;
+//           player2Tile = document.getElementById(player2X + "," + player2Y);
+//           player2Tile.style.backgroundColor = "red";
+//         }
+//         break;
+//     }
+//   };
+// }
 function checkWinCond(player) {
   winCond = 0;
   for (r = 1; r <= 6; r++) {
@@ -212,7 +183,6 @@ function checkVert(r, c, rowTile, player) {
   winOrReset(player);
 }
 
-//check Diagonal /
 function checkDiag1(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 3; i++) {
@@ -224,7 +194,6 @@ function checkDiag1(r, c, rowTile, player) {
   winOrReset(player);
 }
 
-//check Diagonal \
 function checkDiag2(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 3; i++) {
@@ -239,10 +208,9 @@ function checkDiag2(r, c, rowTile, player) {
 function winOrReset(player) {
   if (winCond >= 3) {
     //player wins
-    console.log(player + "wins");
-    victory(player);
+    console.log(player + " Wins!");
   } else {
     winCond = 0;
   }
 }
-startPlayerMovement();
+//startPlayerMovement();
