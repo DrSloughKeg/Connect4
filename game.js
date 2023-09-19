@@ -1,5 +1,6 @@
 //set up the board
 function makeBoard(row, column) {
+  lengthCol = [6, 6, 6, 6, 6, 6, 6];
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -12,6 +13,7 @@ function makeBoard(row, column) {
     for (c = 1; c <= column; c++) {
       let newCols = document.createElement("td");
       newCols.setAttribute("id", r + "," + c);
+      newCols.addEventListener("click", placeTile1);
       newRows.appendChild(newCols);
     }
   }
@@ -206,4 +208,4 @@ function winOrReset(player) {
   }
 }
 
-// startPlayerMovement();
+//startPlayerMovement();
