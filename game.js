@@ -1,5 +1,5 @@
-let player1 = "red";
-let player2 = "black";
+let player1 = "black";
+let player2 = "red";
 let currentPlayer = player1;
 let lengthCol;
 
@@ -60,13 +60,13 @@ function placeTile1() {
   if (currentPlayer == player1) {
     tile.style.backgroundColor = player1;
     tile.classList.add("player1");
-    currentPlayer = player2;
     checkWinCond("player1");
+    currentPlayer = player2;
   } else {
     tile.style.backgroundColor = player2;
     tile.classList.add("player2");
-    currentPlayer = player1;
     checkWinCond("player2");
+    currentPlayer = player1;
   }
   r--;
   lengthCol[c] = r;
