@@ -5,7 +5,7 @@ let lengthCol;
 
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6]; //Mouse
+  lengthCol = [7, 7, 7, 7, 7, 7, 7, 7]; //Mouse
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
