@@ -5,7 +5,7 @@ let lengthCol;
 
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6]; //Mouse
+  lengthCol = [7, 7, 7, 7, 7, 7, 7, 7]; //Mouse
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -222,9 +222,9 @@ function winOrReset(player) {
 
 function victory(player) {
   if (player == "player1") {
-    display.textContent = "Player 1 Wins!";
+    display.textContent = "Black Wins!";
   } else if (player == "player2") {
-    display.textContent = "Player 2 Wins!";
+    display.textContent = "Red Wins!";
   }
 }
 
