@@ -4,7 +4,7 @@ let currentPlayer = player1;
 let lengthCol;
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6];
+  lengthCol = [6, 6, 6, 6, 6, 6, 6]; // how many tiles can fill in the columns
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
