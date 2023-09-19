@@ -12,3 +12,4 @@
 - When the board if full it should display a tie - Xing
 - Instructions for the game to be displayed at the bottom of the screen - Michael
 - CSS Styling to be improved
+- allow the mouse to select the tile for the player - xing

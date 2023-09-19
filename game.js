@@ -3,7 +3,6 @@ let player2 = "red";
 let BGColor = "rgb(140, 158, 158)";
 let currentPlayer = player1;
 let lengthCol;
-
 //set up the board
 function makeBoard(row, column) {
   lengthCol = [7, 7, 7, 7, 7, 7, 7, 7]; //Mouse
@@ -11,15 +10,11 @@ function makeBoard(row, column) {
 
   for (r = 1; r <= row; r++) {
     let newRows = document.createElement("tr");
-    if (r === 1) {
-      // Add a class to the first row
-      newRows.classList.add("ignoreCSSRow");
-    }
     newTable.appendChild(newRows);
     for (c = 1; c <= column; c++) {
       let newCols = document.createElement("td");
       newCols.setAttribute("id", r + "," + c);
-      newCols.addEventListener("click", placeTile1); //Mouse
+      newCols.addEventListener("click", placeTile1);
       newRows.appendChild(newCols);
     }
   }
@@ -149,10 +144,14 @@ function startPlayerMovement() {
     tile.style.backgroundColor = player1;
     tile.classList.add(player1);
     currentPlayer = player2;
+    let turn = document.getElementById("turn");
+    turn.innerHTML = " turn :" + currentPlayer;
   } else {
     tile.style.backgroundColor = player2;
     tile.classList.add(player2);
     currentPlayer = player1;
+    let turn = document.getElementById("turn");
+    turn.innerHTML = " turn :" + currentPlayer;
   }
   r--;
   lengthCol[c - 1] = r;
@@ -244,7 +243,6 @@ function checkVert(r, c, rowTile, player) {
   winOrReset(player);
 }
 
-//check Diagonal /
 function checkDiag1(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 4; i++) {
@@ -256,7 +254,6 @@ function checkDiag1(r, c, rowTile, player) {
   winOrReset(player);
 }
 
-//check Diagonal \
 function checkDiag2(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 4; i++) {
@@ -271,8 +268,7 @@ function checkDiag2(r, c, rowTile, player) {
 function winOrReset(player) {
   if (winCond >= 4) {
     //player wins
-    console.log(player + "wins");
-    victory(player);
+    console.log(player + " Wins!");
   } else {
     winCond = 0;
   }
