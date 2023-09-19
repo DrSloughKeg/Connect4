@@ -1,6 +1,11 @@
+let player1 = "red";
+let player2 = "black";
+let currentPlayer = player1;
+let lengthCol;
+
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6];
+  lengthCol = [6, 6, 6, 6, 6, 6, 6]; //Xing
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -13,7 +18,7 @@ function makeBoard(row, column) {
     for (c = 1; c <= column; c++) {
       let newCols = document.createElement("td");
       newCols.setAttribute("id", r + "," + c);
-      newCols.addEventListener("click", placeTile1);
+      newCols.addEventListener("click", placeTile1); //Xing
       newRows.appendChild(newCols);
     }
   }
@@ -38,6 +43,7 @@ function placeTile(x, y, color, player) {
 }
 
 function placeTile1() {
+  //Xing
   let position = this.id.split(",");
   let r = parseInt(position[0]);
   let c = parseInt(position[1]);
@@ -208,4 +214,4 @@ function winOrReset(player) {
   }
 }
 
-//startPlayerMovement();
+startPlayerMovement();
