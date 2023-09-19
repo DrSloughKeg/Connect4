@@ -5,7 +5,6 @@ let lengthCol;
 
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6, 6]; //Mouse
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -230,7 +229,9 @@ function victory(player) {
   } else if (player == "player2") {
     display.textContent = "Red Wins!";
   }
+  playAgainButton();
 }
+
 function tieCondition() {
   let red = document.getElementsByClassName(player1);
   let black = document.getElementsByClassName(player2);
@@ -238,5 +239,23 @@ function tieCondition() {
     let result = document.getElementById("winner");
     result.innerHTML = " Tie!";
   }
+  playAgainButton();
 }
+
+function playAgainButton() {
+  let playAgainButton = document.createElement("input");
+  playAgainButton.type = "button";
+  playAgainButton.id = "display";
+  playAgainButton.value = "Play Again";
+  playAgainButton.addEventListener("click", reset);
+  document.getElementById("display").appendChild(playAgainButton);
+}
+
+function reset() { 
+  let playAgainButton = document.getElementById("display");
+  playAgainButton.disabled = false;
+
+  playAgainButton.addEventListener("click", window.location.reload());
+}
+
 startPlayerMovement();
