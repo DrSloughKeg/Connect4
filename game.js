@@ -35,6 +35,30 @@ function placeTile(x, y, color, player) {
   }
 }
 
+function placeTile1() {
+  let position = this.id.split(",");
+  let r = parseInt(position[0]);
+  let c = parseInt(position[1]);
+  r = lengthCol[c];
+  if (r == 0) {
+    return;
+  }
+  let tile = document.getElementById(r + "," + c);
+  if (currentPlayer == player1) {
+    tile.style.backgroundColor = player1;
+    tile.classList.add(player1);
+    currentPlayer = player2;
+  } else {
+    tile.style.backgroundColor = player2;
+    tile.classList.add(player2);
+    currentPlayer = player1;
+  }
+  r--;
+  lengthCol[c] = r;
+  checkWinCond(player1);
+  checkWinCond(player2);
+}
+
 function startPlayerMovement() {
   // Setting Both player 1 and 2 at the first tile (1,1)
   let player1Tile = document.getElementById("1,1");
@@ -149,6 +173,7 @@ function checkVert(r, c, rowTile, player) {
   winOrReset(player);
 }
 
+//check Diagonal /
 function checkDiag1(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 3; i++) {
@@ -160,6 +185,7 @@ function checkDiag1(r, c, rowTile, player) {
   winOrReset(player);
 }
 
+//check Diagonal \
 function checkDiag2(r, c, rowTile, player) {
   winCond++;
   for (i = 1; i < 3; i++) {
@@ -180,4 +206,5 @@ function winOrReset(player) {
   }
 }
 
-startPlayerMovement();
+// startPlayerMovement();
+placeTile1();
