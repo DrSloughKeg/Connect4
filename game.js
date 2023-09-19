@@ -52,10 +52,13 @@ function placeTile1() {
   let position = this.id.split(",");
   let c = parseInt(position[1]);
   let r = lengthCol[c];
-  
+
   while (r >= 1) {
     let tile = document.getElementById(r + 1 + "," + c);
-    if (tile.style.backgroundColor !== "black" && tile.style.backgroundColor !== "red") {
+    if (
+      tile.style.backgroundColor !== "black" &&
+      tile.style.backgroundColor !== "red"
+    ) {
       if (currentPlayer == player1) {
         tile.style.backgroundColor = player1;
         tile.classList.add("player1");
@@ -67,7 +70,7 @@ function placeTile1() {
         checkWinCond("player2");
         currentPlayer = player1;
       }
-      lengthCol[c] = r - 1; 
+      lengthCol[c] = r - 1;
       break;
     }
     r--;
@@ -130,7 +133,7 @@ function startPlayerMovement() {
 
 function checkWinCond(player) {
   winCond = 0;
-  for (r = 1; r <= 6; r++) {
+  for (r = 7; r > 0; r--) {
     for (c = 1; c <= 7; c++) {
       let rowTile = document.getElementById(r + "," + c);
       if (rowTile.className == player) {
@@ -166,7 +169,7 @@ function checkWinCond(player) {
 //check horizontal
 function checkHori(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 3; i++) {
+  for (i = 1; i < 4; i++) {
     rowTile = document.getElementById(r + "," + (c + i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -178,7 +181,7 @@ function checkHori(r, c, rowTile, player) {
 //check vertical
 function checkVert(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 3; i++) {
+  for (i = 1; i < 4; i++) {
     rowTile = document.getElementById(r - i + "," + c);
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -190,7 +193,7 @@ function checkVert(r, c, rowTile, player) {
 //check Diagonal /
 function checkDiag1(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 3; i++) {
+  for (i = 1; i < 4; i++) {
     rowTile = document.getElementById(r - i + "," + (c + i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -202,7 +205,7 @@ function checkDiag1(r, c, rowTile, player) {
 //check Diagonal \
 function checkDiag2(r, c, rowTile, player) {
   winCond++;
-  for (i = 1; i < 3; i++) {
+  for (i = 1; i < 4; i++) {
     rowTile = document.getElementById(r - i + "," + (c - i));
     if (rowTile != null && rowTile.className == player) {
       winCond++;
@@ -212,7 +215,7 @@ function checkDiag2(r, c, rowTile, player) {
 }
 
 function winOrReset(player) {
-  if (winCond >= 3) {
+  if (winCond >= 4) {
     //player wins
     console.log(player + "wins");
     victory(player);

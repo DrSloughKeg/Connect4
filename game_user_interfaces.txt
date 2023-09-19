@@ -6,7 +6,7 @@
 
 /***** Merge the 3 codes together *****/ done
 
-- Display the results of the winner (Under the title of the game) (Has to be called by the win condition) - Ben
+- Display the results of the winner (Under the title of the game) (Has to be called by the win condition) - Ben done
 - Display which players turn when winner has not been determined - Xing and Michael
 - When a player wins, a reset button should be displayed and the only option left to click - Michael
 - When the board if full it should display a tie - Xing
