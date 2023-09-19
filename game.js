@@ -81,29 +81,28 @@ function startPlayerMovement() {
   let player2R = 1;
   let player2C = 1;
   player1Tile.style.backgroundColor = "black"; // Player 1 is black & Player 2 is red
-  let currentPlayer = 1; // player 1 starts
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 32: // When Space bar is pressed
-        if (currentPlayer == 1) {
+        if (currentPlayer == player1) {
           placeTile(player1R, player1C, "black", "player1");
           player1Tile.style.backgroundColor = "white";
-          currentPlayer = 2;
+          currentPlayer = player2;
         } else {
           placeTile(player2R, player2C, "red", "player2");
           player2Tile.style.backgroundColor = "white";
-          currentPlayer = 1;
+          currentPlayer = player1;
         }
         break;
       case 37: // When left arrow is pressed
-        if (currentPlayer == 1 && player1C > 1) {
+        if (currentPlayer == player1 && player1C > 1) {
           // (&& PLayer1C > 1) sets the boundary to the board.
           player1Tile.style.backgroundColor = "white";
           player1C--;
           player1Tile = document.getElementById(player1R + "," + player1C);
           player1Tile.style.backgroundColor = "black";
-        } else if (currentPlayer == 2 && player2C > 1) {
+        } else if (currentPlayer == player2 && player2C > 1) {
           player2Tile.style.backgroundColor = "white";
           player2C--;
           player2Tile = document.getElementById(player2R + "," + player2C);
@@ -111,12 +110,12 @@ function startPlayerMovement() {
         }
         break;
       case 39: // When Right arrow is pressed
-        if (currentPlayer == 1 && player1C < 7) {
+        if (currentPlayer == player1 && player1C < 7) {
           player1Tile.style.backgroundColor = "white";
           player1C++;
           player1Tile = document.getElementById(player1R + "," + player1C);
           player1Tile.style.backgroundColor = "black";
-        } else if (currentPlayer == 2 && player2C < 7) {
+        } else if (currentPlayer == player2 && player2C < 7) {
           player2Tile.style.backgroundColor = "white";
           player2C++;
           player2Tile = document.getElementById(player2R + "," + player2C);
