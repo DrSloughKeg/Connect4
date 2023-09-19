@@ -44,6 +44,7 @@ function placeTile(x, y, color, player) {
       rowTile.style.backgroundColor = color;
       rowTile.setAttribute("class", player);
       checkWinCond(player);
+      tieCondition();
       break;
     }
   }
@@ -64,12 +65,14 @@ function placeTile1() {
       if (currentPlayer == player1) {
         tile.style.backgroundColor = player1;
         tile.classList.add("player1");
+        tieCondition();
         checkWinCond("player1");
         currentPlayer = player2;
         display.textContent = "It's Red's turn to place a tile.";
       } else {
         tile.style.backgroundColor = player2;
         tile.classList.add("player2");
+        tieCondition();
         checkWinCond("player2");
         currentPlayer = player1;
         display.textContent = "It's Black's turn to place a tile.";
@@ -135,6 +138,52 @@ function startPlayerMovement() {
     }
   };
 }
+
+/*
+  r = lengthCol[c - 1];
+  if (r == 0) {
+    return;
+  }
+  let tile = document.getElementById(r + "," + c);
+  if (currentPlayer == player1) {
+    tile.style.backgroundColor = player1;
+    tile.classList.add(player1);
+    currentPlayer = player2;
+  } else {
+    tile.style.backgroundColor = player2;
+    tile.classList.add(player2);
+    currentPlayer = player1;
+  }
+  r--;
+  lengthCol[c - 1] = r;
+  tieCondition();
+  checkWinCond(player1);
+  checkWinCond(player2);
+}
+*/
+function tieCondition() {
+  let red = document.getElementsByClassName(player1);
+  let black = document.getElementsByClassName(player2);
+  if (red.length + black.length == 6 * 7) {
+    let result = document.getElementById("winner");
+    result.innerHTML = " Tie!";
+  }
+}
+
+// function placeTile(x, y, color, player) {
+//   for (let r = 6; r >= 1; r--) {
+//     let rowTile = document.getElementById(r + "," + y);
+//     if (
+//       rowTile.style.backgroundColor !== "black" &&
+//       rowTile.style.backgroundColor !== "red"
+//     ) {
+//       rowTile.style.backgroundColor = color;
+//       rowTile.setAttribute("class", player);
+//       checkWinCond(player);
+//       break;
+//     }
+//   }
+// }
 
 function checkWinCond(player) {
   winCond = 0;
