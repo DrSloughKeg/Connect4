@@ -42,6 +42,7 @@ function placeTile(x, y, color, player) {
       rowTile.style.backgroundColor = color;
       rowTile.setAttribute("class", player);
       checkWinCond(player);
+      tieCondition();
       break;
     }
   }
@@ -63,11 +64,13 @@ function placeTile1() {
         tile.style.backgroundColor = player1;
         tile.classList.add("player1");
         checkWinCond("player1");
+        tieCondition();
         currentPlayer = player2;
       } else {
         tile.style.backgroundColor = player2;
         tile.classList.add("player2");
         checkWinCond("player2");
+        tieCondition();
         currentPlayer = player1;
       }
       lengthCol[c] = r - 1;
@@ -232,10 +235,10 @@ function victory(player) {
   }
 }
 function tieCondition() {
-  let red = document.getElementsByClassName(player1);
-  let black = document.getElementsByClassName(player2);
+  let red = document.getElementsByClassName("player1");
+  let black = document.getElementsByClassName("player2");
   if (red.length + black.length == 6 * 7) {
-    let result = document.getElementById("winner");
+    let result = document.getElementById("display");
     result.innerHTML = " Tie!";
   }
 }
