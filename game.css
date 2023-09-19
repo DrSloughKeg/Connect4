@@ -3,24 +3,21 @@ body {
 }
 
 table {
+  border: solid;
   border-width: 1px;
   margin: 0 auto 0 auto;
-  background: linear-gradient(
-    transparent,
-    transparent 85px,
-    rgb(110, 170, 215) 85px
-  );
+  border-color: rgb(0, 0, 128);
+  background-color: rgb(110, 170, 215);
 }
-
 td {
   width: 80px;
   height: 80px;
-  border: solid;
+  border: solid rgb(0, 0, 128);
   border-radius: 100px;
   border-width: 3px;
   background-color: white;
 }
-
-tr.ignoreCSSRow td {
-  border: none;
+#turn {
+  font-size: 25px;
+  margin: 10px auto;
 }
