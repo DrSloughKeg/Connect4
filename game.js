@@ -30,6 +30,7 @@ let display = document.createElement("h2");
 let displayTxt = document.createTextNode("");
 display.appendChild(displayTxt);
 document.getElementById("display").appendChild(display);
+display.textContent = "It's Black's turn to place a tile.";
 makeBoard(7, 7);
 
 function placeTile(x, y, color, player) {
@@ -64,11 +65,13 @@ function placeTile1() {
         tile.classList.add("player1");
         checkWinCond("player1");
         currentPlayer = player2;
+        display.textContent = "It's Red's turn to place a tile.";
       } else {
         tile.style.backgroundColor = player2;
         tile.classList.add("player2");
         checkWinCond("player2");
         currentPlayer = player1;
+        display.textContent = "It's Black's turn to place a tile.";
       }
       lengthCol[c] = r - 1;
       break;
@@ -94,10 +97,12 @@ function startPlayerMovement() {
           placeTile(player1R, player1C, "black", "player1");
           player1Tile.style.backgroundColor = "white";
           currentPlayer = player2;
+          display.textContent = "It's Red's turn to place a tile.";
         } else {
           placeTile(player2R, player2C, "red", "player2");
           player2Tile.style.backgroundColor = "white";
           currentPlayer = player1;
+          display.textContent = "It's Black's turn to place a tile.";
         }
         break;
       case 37: // When left arrow is pressed
