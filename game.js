@@ -5,7 +5,7 @@ let lengthCol;
 
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [7, 7, 7, 7, 7, 7, 7, 7]; //Mouse
+  lengthCol = [6, 6, 6, 6, 6, 6, 6, 6]; //Mouse
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -48,28 +48,30 @@ function placeTile(x, y, color, player) {
 }
 
 function placeTile1() {
-  //Mouse
+  // Mouse
   let position = this.id.split(",");
-  let r = parseInt(position[0]);
   let c = parseInt(position[1]);
-  r = lengthCol[c];
-  if (r == 0) {
-    return;
+  let r = lengthCol[c];
+  
+  while (r >= 1) {
+    let tile = document.getElementById(r + 1 + "," + c);
+    if (tile.style.backgroundColor !== "black" && tile.style.backgroundColor !== "red") {
+      if (currentPlayer == player1) {
+        tile.style.backgroundColor = player1;
+        tile.classList.add("player1");
+        checkWinCond("player1");
+        currentPlayer = player2;
+      } else {
+        tile.style.backgroundColor = player2;
+        tile.classList.add("player2");
+        checkWinCond("player2");
+        currentPlayer = player1;
+      }
+      lengthCol[c] = r - 1; 
+      break;
+    }
+    r--;
   }
-  let tile = document.getElementById(r + "," + c);
-  if (currentPlayer == player1) {
-    tile.style.backgroundColor = player1;
-    tile.classList.add("player1");
-    checkWinCond("player1");
-    currentPlayer = player2;
-  } else {
-    tile.style.backgroundColor = player2;
-    tile.classList.add("player2");
-    checkWinCond("player2");
-    currentPlayer = player1;
-  }
-  r--;
-  lengthCol[c] = r;
 }
 
 function startPlayerMovement() {
