@@ -231,5 +231,12 @@ function victory(player) {
     display.textContent = "Red Wins!";
   }
 }
-
+function tieCondition() {
+  let red = document.getElementsByClassName(player1);
+  let black = document.getElementsByClassName(player2);
+  if (red.length + black.length == 6 * 7) {
+    let result = document.getElementById("winner");
+    result.innerHTML = " Tie!";
+  }
+}
 startPlayerMovement();
