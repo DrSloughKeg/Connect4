@@ -5,7 +5,7 @@ let lengthCol;
 
 //set up the board
 function makeBoard(row, column) {
-  lengthCol = [6, 6, 6, 6, 6, 6, 6]; //Xing
+  lengthCol = [6, 6, 6, 6, 6, 6, 6]; //Mouse
   let newTable = document.createElement("table");
 
   for (r = 1; r <= row; r++) {
@@ -18,13 +18,18 @@ function makeBoard(row, column) {
     for (c = 1; c <= column; c++) {
       let newCols = document.createElement("td");
       newCols.setAttribute("id", r + "," + c);
-      newCols.addEventListener("click", placeTile1); //Xing
+      newCols.addEventListener("click", placeTile1); //Mouse
       newRows.appendChild(newCols);
     }
   }
   document.querySelector("body").appendChild(newTable);
 }
 
+//set up
+let display = document.createElement("h2");
+let displayTxt = document.createTextNode("");
+display.appendChild(displayTxt);
+document.getElementById("display").appendChild(display);
 makeBoard(7, 7);
 
 function placeTile(x, y, color, player) {
@@ -43,7 +48,7 @@ function placeTile(x, y, color, player) {
 }
 
 function placeTile1() {
-  //Xing
+  //Mouse
   let position = this.id.split(",");
   let r = parseInt(position[0]);
   let c = parseInt(position[1]);
@@ -54,17 +59,17 @@ function placeTile1() {
   let tile = document.getElementById(r + "," + c);
   if (currentPlayer == player1) {
     tile.style.backgroundColor = player1;
-    tile.classList.add(player1);
+    tile.classList.add("player1");
     currentPlayer = player2;
+    checkWinCond("player1");
   } else {
     tile.style.backgroundColor = player2;
-    tile.classList.add(player2);
+    tile.classList.add("player2");
     currentPlayer = player1;
+    checkWinCond("player2");
   }
   r--;
   lengthCol[c] = r;
-  checkWinCond(player1);
-  checkWinCond(player2);
 }
 
 function startPlayerMovement() {
@@ -208,9 +213,18 @@ function checkDiag2(r, c, rowTile, player) {
 function winOrReset(player) {
   if (winCond >= 3) {
     //player wins
-    console.log(player + " Wins!");
+    console.log(player + "wins");
+    victory(player);
   } else {
     winCond = 0;
+  }
+}
+
+function victory(player) {
+  if (player == "player1") {
+    display.textContent = "Player 1 Wins!";
+  } else if (player == "player2") {
+    display.textContent = "Player 2 Wins!";
   }
 }
 

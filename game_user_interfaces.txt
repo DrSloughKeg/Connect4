@@ -4,7 +4,7 @@
 - css to be improved - all of us
 - allow the mouse to select the tile for the player - xing
 
-/***** Merge the 3 codes together *****/
+/***** Merge the 3 codes together *****/ done
 
 - Display the results of the winner (Under the title of the game) (Has to be called by the win condition) - Ben
 - Display which players turn when winner has not been determined - Xing and Michael
