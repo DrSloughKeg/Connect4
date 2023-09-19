@@ -26,7 +26,7 @@ function placeTile1() {
   let position = this.id.split(",");
   let r = parseInt(position[0]);
   let c = parseInt(position[1]);
-  r = lengthCol[c];
+  r = lengthCol[c - 1];
   if (r == 0) {
     return;
   }
@@ -41,10 +41,20 @@ function placeTile1() {
     currentPlayer = player1;
   }
   r--;
-  lengthCol[c] = r;
+  lengthCol[c - 1] = r;
+  tieCondition();
   checkWinCond(player1);
   checkWinCond(player2);
 }
+function tieCondition() {
+  let red = document.getElementsByClassName(player1);
+  let black = document.getElementsByClassName(player2);
+  if (red.length + black.length == 6 * 7) {
+    let result = document.getElementById("winner");
+    result.innerHTML = " Tie!";
+  }
+}
+
 // function placeTile(x, y, color, player) {
 //   for (let r = 6; r >= 1; r--) {
 //     let rowTile = document.getElementById(r + "," + y);
@@ -199,4 +209,4 @@ function winOrReset(player) {
     winCond = 0;
   }
 }
-// startPlayerMovement();
+startPlayerMovement();
