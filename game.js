@@ -88,7 +88,6 @@ function startPlayerMovement() {
   let player1C = 1;
   let player2R = 1;
   let player2C = 1;
-  player1Tile.style.backgroundColor = "black"; // Player 1 is black & Player 2 is red
 
   document.onkeydown = function (e) {
     switch (e.keyCode) {
@@ -230,11 +229,28 @@ function winOrReset(player) {
 }
 
 function victory(player) {
+  let display = document.getElementById("display"); 
   if (player == "player1") {
-    display.textContent = "Black Wins!";
+    display.innerHTML = "Black Wins!<br>";
   } else if (player == "player2") {
-    display.textContent = "Red Wins!";
+    display.innerHTML = "Red Wins!<br>";
   }
+  return playAgainButton();
 }
+
+function playAgainButton() {
+  let playAgainButton = document.createElement("input");
+  playAgainButton.type = "button";
+  playAgainButton.id = "display";
+  playAgainButton.value = "Play Again";
+  playAgainButton.addEventListener("click", reset);
+  document.getElementById("display").appendChild(playAgainButton);
+}
+
+function reset() { 
+  let playAgainButton = document.getElementById("display");
+  playAgainButton.addEventListener("click", window.location.reload());
+}
+
 
 startPlayerMovement();
