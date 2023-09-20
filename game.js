@@ -46,7 +46,7 @@ function placeTile(x, y, color, player) {
 }
 
 function placeTile1() {
-  // Mouse
+  // mouse control
   let position = this.id.split(",");
   let c = parseInt(position[1]);
   let r = lengthCol[c];
@@ -160,6 +160,7 @@ function startPlayerMovement() {
   checkWinCond(player2);
 }
 */
+// board is full
 function tieCondition() {
   let red = document.getElementsByClassName(player1);
   let black = document.getElementsByClassName(player2);
