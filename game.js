@@ -1,5 +1,6 @@
 let player1 = "black";
 let player2 = "red";
+let BGColor = "rgb(140, 158, 158)";
 let currentPlayer = player1;
 let lengthCol;
 
@@ -94,12 +95,12 @@ function startPlayerMovement() {
       case 32: // When Space bar is pressed
         if (currentPlayer == player1) {
           placeTile(player1R, player1C, "black", "player1");
-          player1Tile.style.backgroundColor = "white";
+          player1Tile.style.backgroundColor = BGColor;
           currentPlayer = player2;
           display.textContent = "It's Red's turn to place a tile.";
         } else {
           placeTile(player2R, player2C, "red", "player2");
-          player2Tile.style.backgroundColor = "white";
+          player2Tile.style.backgroundColor = BGColor;
           currentPlayer = player1;
           display.textContent = "It's Black's turn to place a tile.";
         }
@@ -107,12 +108,12 @@ function startPlayerMovement() {
       case 37: // When left arrow is pressed
         if (currentPlayer == player1 && player1C > 1) {
           // (&& PLayer1C > 1) sets the boundary to the board.
-          player1Tile.style.backgroundColor = "white";
+          player1Tile.style.backgroundColor = BGColor;
           player1C--;
           player1Tile = document.getElementById(player1R + "," + player1C);
           player1Tile.style.backgroundColor = "black";
         } else if (currentPlayer == player2 && player2C > 1) {
-          player2Tile.style.backgroundColor = "white";
+          player2Tile.style.backgroundColor = BGColor;
           player2C--;
           player2Tile = document.getElementById(player2R + "," + player2C);
           player2Tile.style.backgroundColor = "red";
@@ -120,12 +121,12 @@ function startPlayerMovement() {
         break;
       case 39: // When Right arrow is pressed
         if (currentPlayer == player1 && player1C < 7) {
-          player1Tile.style.backgroundColor = "white";
+          player1Tile.style.backgroundColor = BGColor;
           player1C++;
           player1Tile = document.getElementById(player1R + "," + player1C);
           player1Tile.style.backgroundColor = "black";
         } else if (currentPlayer == player2 && player2C < 7) {
-          player2Tile.style.backgroundColor = "white";
+          player2Tile.style.backgroundColor = BGColor;
           player2C++;
           player2Tile = document.getElementById(player2R + "," + player2C);
           player2Tile.style.backgroundColor = "red";
@@ -229,7 +230,7 @@ function winOrReset(player) {
 }
 
 function victory(player) {
-  let display = document.getElementById("display"); 
+  let display = document.getElementById("display");
   if (player == "player1") {
     display.innerHTML = "Black Wins!<br>";
   } else if (player == "player2") {
@@ -247,10 +248,9 @@ function playAgainButton() {
   document.getElementById("display").appendChild(playAgainButton);
 }
 
-function reset() { 
+function reset() {
   let playAgainButton = document.getElementById("display");
   playAgainButton.addEventListener("click", window.location.reload());
 }
-
 
 startPlayerMovement();

@@ -1,5 +1,6 @@
 body {
   text-align: center;
+  background-color: rgb(140, 158, 158);
 }
 
 table {
@@ -23,4 +24,27 @@ td {
 
 tr.ignoreCSSRow td {
   border: none;
+  background-color: rgb(140, 158, 158);
+}
+
+h1 {
+  margin-top: 0%;
+  margin-bottom: 5px;
+  font-size: 50px;
+}
+
+.instructions {
+  margin: auto;
+  max-width: 70%;
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: 0px;
+}
+
+li {
+  padding-bottom: 20px;
+  list-style: none;
+  font-size: 20px;
 }
