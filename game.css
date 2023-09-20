@@ -4,16 +4,19 @@ body {
 }
 
 table {
-  border: solid;
   border-width: 1px;
   margin: 0 auto 0 auto;
-  border-color: rgb(0, 0, 128);
-  background-color: rgb(110, 170, 215);
+  background: linear-gradient(
+    transparent,
+    transparent 85px,
+    rgb(110, 170, 215) 85px
+  );
 }
+
 td {
   width: 80px;
   height: 80px;
-  border: solid rgb(0, 0, 128);
+  border: solid;
   border-radius: 100px;
   border-width: 3px;
   background-color: white;
