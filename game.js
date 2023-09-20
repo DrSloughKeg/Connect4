@@ -74,14 +74,14 @@ function placeTile1() {
           checkWinCond("player1");
           tieCondition();
           currentPlayer = player2;
-          // display.textContent = "It's Red's turn to place a tile.";
+          display.textContent = "It's Red's turn to place a tile.";
         } else {
           tile.style.backgroundColor = player2;
           tile.classList.add("player2");
           checkWinCond("player2");
           tieCondition();
           currentPlayer = player1;
-          // display.textContent = "It's Black's turn to place a tile.";
+          display.textContent = "It's Black's turn to place a tile.";
         }
         lengthCol[c] = r - 1;
         break;
