@@ -23,6 +23,7 @@ function makeBoard(row, column) {
 makeBoard(6, 7);
 
 function placeTile1() {
+  // mouse control
   let position = this.id.split(",");
   let r = parseInt(position[0]);
   let c = parseInt(position[1]);
@@ -50,6 +51,7 @@ function placeTile1() {
   checkWinCond(player1);
   checkWinCond(player2);
 }
+// board is full
 function tieCondition() {
   let red = document.getElementsByClassName(player1);
   let black = document.getElementsByClassName(player2);
