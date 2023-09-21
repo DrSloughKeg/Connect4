@@ -1,7 +1,9 @@
 let player1 = "black";
 let player2 = "red";
 let currentPlayer = player1;
+let BGColor = "rgb(140, 158, 158)";
 let lengthCol;
+let gameOver = false;
 
 //set up the board
 function makeBoard(row, column) {
@@ -34,16 +36,21 @@ display.textContent = "It's Black's turn to place a tile.";
 makeBoard(7, 7);
 
 function placeTile(x, y, color, player) {
-  for (let r = 7; r >= 1; r--) {
-    let rowTile = document.getElementById(r + "," + y);
-    if (
-      rowTile.style.backgroundColor !== "black" &&
-      rowTile.style.backgroundColor !== "red"
-    ) {
-      rowTile.style.backgroundColor = color;
-      rowTile.setAttribute("class", player);
-      checkWinCond(player);
-      break;
+  if (gameOver) {
+    return;
+  } else {
+    for (let r = 7; r >= 1; r--) {
+      let rowTile = document.getElementById(r + "," + y);
+      if (
+        rowTile.style.backgroundColor !== "black" &&
+        rowTile.style.backgroundColor !== "red"
+      ) {
+        rowTile.style.backgroundColor = color;
+        rowTile.setAttribute("class", player);
+        checkWinCond(player);
+        tieCondition();
+        break;
+      }
     }
   }
 }
@@ -53,30 +60,35 @@ function placeTile1() {
   let position = this.id.split(",");
   let c = parseInt(position[1]);
   let r = lengthCol[c];
-
-  while (r >= 1) {
-    let tile = document.getElementById(r + 1 + "," + c);
-    if (
-      tile.style.backgroundColor !== "black" &&
-      tile.style.backgroundColor !== "red"
-    ) {
-      if (currentPlayer == player1) {
-        tile.style.backgroundColor = player1;
-        tile.classList.add("player1");
-        checkWinCond("player1");
-        currentPlayer = player2;
-        display.textContent = "It's Red's turn to place a tile.";
-      } else {
-        tile.style.backgroundColor = player2;
-        tile.classList.add("player2");
-        checkWinCond("player2");
-        currentPlayer = player1;
-        display.textContent = "It's Black's turn to place a tile.";
+  if (gameOver) {
+    return;
+  } else {
+    while (r >= 1) {
+      let tile = document.getElementById(r + 1 + "," + c);
+      if (
+        tile.style.backgroundColor !== "black" &&
+        tile.style.backgroundColor !== "red"
+      ) {
+        if (currentPlayer == player1) {
+          tile.style.backgroundColor = player1;
+          tile.classList.add("player1");
+          checkWinCond("player1");
+          tieCondition();
+          currentPlayer = player2;
+          display.innerHTML = "It's <span>Red's</span> turn to place a tile.";
+        } else {
+          tile.style.backgroundColor = player2;
+          tile.classList.add("player2");
+          checkWinCond("player2");
+          tieCondition();
+          currentPlayer = player1;
+          display.textContent = "It's Black's turn to place a tile.";
+        }
+        lengthCol[c] = r - 1;
+        break;
       }
-      lengthCol[c] = r - 1;
-      break;
+      r--;
     }
-    r--;
   }
 }
 
@@ -94,12 +106,12 @@ function startPlayerMovement() {
       case 32: // When Space bar is pressed
         if (currentPlayer == player1) {
           placeTile(player1R, player1C, "black", "player1");
-          player1Tile.style.backgroundColor = "white";
+          player1Tile.style.backgroundColor = BGColor;
           currentPlayer = player2;
-          display.textContent = "It's Red's turn to place a tile.";
+          display.innerHTML = "It's <span>Red's</span> turn to place a tile.";
         } else {
           placeTile(player2R, player2C, "red", "player2");
-          player2Tile.style.backgroundColor = "white";
+          player2Tile.style.backgroundColor = BGColor;
           currentPlayer = player1;
           display.textContent = "It's Black's turn to place a tile.";
         }
@@ -107,12 +119,12 @@ function startPlayerMovement() {
       case 37: // When left arrow is pressed
         if (currentPlayer == player1 && player1C > 1) {
           // (&& PLayer1C > 1) sets the boundary to the board.
-          player1Tile.style.backgroundColor = "white";
+          player1Tile.style.backgroundColor = BGColor;
           player1C--;
           player1Tile = document.getElementById(player1R + "," + player1C);
           player1Tile.style.backgroundColor = "black";
         } else if (currentPlayer == player2 && player2C > 1) {
-          player2Tile.style.backgroundColor = "white";
+          player2Tile.style.backgroundColor = BGColor;
           player2C--;
           player2Tile = document.getElementById(player2R + "," + player2C);
           player2Tile.style.backgroundColor = "red";
@@ -120,12 +132,12 @@ function startPlayerMovement() {
         break;
       case 39: // When Right arrow is pressed
         if (currentPlayer == player1 && player1C < 7) {
-          player1Tile.style.backgroundColor = "white";
+          player1Tile.style.backgroundColor = BGColor;
           player1C++;
           player1Tile = document.getElementById(player1R + "," + player1C);
           player1Tile.style.backgroundColor = "black";
         } else if (currentPlayer == player2 && player2C < 7) {
-          player2Tile.style.backgroundColor = "white";
+          player2Tile.style.backgroundColor = BGColor;
           player2C++;
           player2Tile = document.getElementById(player2R + "," + player2C);
           player2Tile.style.backgroundColor = "red";
@@ -223,34 +235,42 @@ function winOrReset(player) {
     //player wins
     console.log(player + "wins");
     victory(player);
+    gameOver = true;
   } else {
     winCond = 0;
   }
 }
 
 function victory(player) {
-  let display = document.getElementById("display"); 
+  let display = document.getElementById("display");
   if (player == "player1") {
     display.innerHTML = "Black Wins!<br>";
   } else if (player == "player2") {
-    display.innerHTML = "Red Wins!<br>";
+    display.innerHTML = "<span>Red</span> Wins!<br>";
   }
   return playAgainButton();
 }
-
+function tieCondition() {
+  let red = document.getElementsByClassName("player1");
+  let black = document.getElementsByClassName("player2");
+  if (red.length + black.length == 6 * 7) {
+    let result = document.getElementById("display");
+    result.innerHTML = "It's a Tie!";
+    playAgainButton();
+  }
+}
 function playAgainButton() {
-  let playAgainButton = document.createElement("input");
+  let playAgainButton = document.createElement("button");
   playAgainButton.type = "button";
-  playAgainButton.id = "display";
-  playAgainButton.value = "Play Again";
+  playAgainButton.class = "btn"; 
+  playAgainButton.innerHTML= "Play Again";
   playAgainButton.addEventListener("click", reset);
   document.getElementById("display").appendChild(playAgainButton);
 }
 
-function reset() { 
+function reset() {
   let playAgainButton = document.getElementById("display");
   playAgainButton.addEventListener("click", window.location.reload());
 }
-
 
 startPlayerMovement();
