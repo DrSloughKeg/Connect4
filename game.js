@@ -75,7 +75,7 @@ function placeTile1() {
           checkWinCond("player1");
           tieCondition();
           currentPlayer = player2;
-          display.textContent = "It's Red's turn to place a tile.";
+          display.innerHTML = "It's <span>Red's</span> turn to place a tile.";
         } else {
           tile.style.backgroundColor = player2;
           tile.classList.add("player2");
@@ -108,7 +108,7 @@ function startPlayerMovement() {
           placeTile(player1R, player1C, "black", "player1");
           player1Tile.style.backgroundColor = BGColor;
           currentPlayer = player2;
-          display.textContent = "It's Red's turn to place a tile.";
+          display.innerHTML = "It's <span>Red's</span> turn to place a tile.";
         } else {
           placeTile(player2R, player2C, "red", "player2");
           player2Tile.style.backgroundColor = BGColor;
@@ -242,35 +242,36 @@ function winOrReset(player) {
 }
 
 function victory(player) {
-  let display = document.getElementById("display");
+  let result = document.getElementById("result");
   if (player == "player1") {
-    display.innerHTML = "Black Wins!<br>";
+    result.innerHTML = "<h2>Black Wins!</h2><br>";
   } else if (player == "player2") {
-    display.innerHTML = "Red Wins!<br>";
+    result.innerHTML = "<h2><span>Red</span> Wins!</h2><br>";
   }
+  document.getElementById("container").style.display = "block";
   return playAgainButton();
 }
 function tieCondition() {
   let red = document.getElementsByClassName("player1");
   let black = document.getElementsByClassName("player2");
   if (red.length + black.length == 6 * 7) {
-    let result = document.getElementById("display");
-    result.innerHTML = " Tie!";
+    let result = document.getElementById("result");
+    result.innerHTML = "<h2>It's a Tie!</h2>";
     playAgainButton();
   }
 }
 function playAgainButton() {
   let playAgainButton = document.createElement("input");
   playAgainButton.type = "button";
-  playAgainButton.id = "display";
+  playAgainButton.id = "button";
   playAgainButton.class = "button"; //
   playAgainButton.value = "Play Again";
   playAgainButton.addEventListener("click", reset);
-  document.getElementById("display").appendChild(playAgainButton);
+  document.getElementById("result").appendChild(playAgainButton);
 }
 
 function reset() {
-  let playAgainButton = document.getElementById("display");
+  let playAgainButton = document.getElementById("button");
   playAgainButton.addEventListener("click", window.location.reload());
 }
 

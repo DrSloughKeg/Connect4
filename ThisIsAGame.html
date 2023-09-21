@@ -8,8 +8,11 @@
   </head>
   <body>
     <section class="game">
-      <h1>Connect 4</h1>
+      <h1>Connect <span id="red-text-title">4</span></h1>
       <div id="display"></div>
+      <div id="container">
+        <div id="result"></div>
+      </div>
     </section>
 
     <script src="game.js"></script>
@@ -18,6 +21,7 @@
       <h3>How to play:</h3>
       <ul>
         <li>
+          The players take turns, with the player who goes first dropping one of
           their discs into any of the seven columns at the top of the game
           board.
         </li>
