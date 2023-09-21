@@ -244,9 +244,9 @@ function winOrReset(player) {
 function victory(player) {
   let display = document.getElementById("display");
   if (player == "player1") {
-    display.innerHTML = "Black Wins!<br>";
+    display.innerHTML = "<h2>Black Wins!</h2><br>";
   } else if (player == "player2") {
-    display.innerHTML = "<span>Red</span> Wins!<br>";
+    display.innerHTML = "<h2><span>Red</span> Wins!</h2><br>";
   }
   return playAgainButton();
 }
@@ -255,7 +255,7 @@ function tieCondition() {
   let black = document.getElementsByClassName("player2");
   if (red.length + black.length == 6 * 7) {
     let result = document.getElementById("display");
-    result.innerHTML = "It's a Tie!";
+    result.innerHTML = "<h2>It's a Tie!</h2>";
     playAgainButton();
   }
 }
