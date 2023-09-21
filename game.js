@@ -75,7 +75,7 @@ function placeTile1() {
           checkWinCond("player1");
           tieCondition();
           currentPlayer = player2;
-          display.textContent = "It's Red's turn to place a tile.";
+          display.innerHTML = "It's <span>Red's</span> turn to place a tile.";
         } else {
           tile.style.backgroundColor = player2;
           tile.classList.add("player2");
@@ -108,7 +108,7 @@ function startPlayerMovement() {
           placeTile(player1R, player1C, "black", "player1");
           player1Tile.style.backgroundColor = BGColor;
           currentPlayer = player2;
-          display.textContent = "It's Red's turn to place a tile.";
+          display.innerHTML = "It's <span>Red's</span> turn to place a tile.";
         } else {
           placeTile(player2R, player2C, "red", "player2");
           player2Tile.style.backgroundColor = BGColor;
@@ -246,7 +246,7 @@ function victory(player) {
   if (player == "player1") {
     result.innerHTML = "<h2>Black Wins!</h2><br>";
   } else if (player == "player2") {
-    result.innerHTML = "<h2>Red Wins!</h2><br>";
+    result.innerHTML = "<h2><span>Red</span> Wins!</h2><br>";
   }
   document.getElementById("container").style.display = "block";
   return playAgainButton();
@@ -256,7 +256,7 @@ function tieCondition() {
   let black = document.getElementsByClassName("player2");
   if (red.length + black.length == 6 * 7) {
     let result = document.getElementById("result");
-    result.innerHTML = "<h2> Tie!</h2>";
+    result.innerHTML = "<h2>It's a Tie!</h2>";
     playAgainButton();
   }
 }

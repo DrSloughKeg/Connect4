@@ -93,9 +93,14 @@ input[type="button"]:hover {
   background-color: white;
   text-align: center;
 }
-span {
+
+#red-text-title {
   font-style: italic;
   font-family: "Press Start 2P";
   font-size: 60px;
+  color: red;
+}
+
+span {
   color: red;
 }
