@@ -1,7 +1,7 @@
 let player1 = "black";
 let player2 = "red";
 let currentPlayer = player1;
-let BGColor = "rgb(140, 158, 158)";
+let BGColor = "transparent";
 let lengthCol;
 let gameOver = false;
 
@@ -39,6 +39,7 @@ function placeTile(x, y, color, player) {
   if (gameOver) {
     return;
   } else {
+    // loop through the rows to check if tile is already placed
     for (let r = 7; r >= 1; r--) {
       let rowTile = document.getElementById(r + "," + y);
       if (
@@ -82,7 +83,7 @@ function placeTile1() {
           checkWinCond("player2");
           tieCondition();
           currentPlayer = player1;
-          display.textContent = "It's Black's turn to place a tile.";
+          display.innerHTML = "It's Black's turn to place a tile.";
         }
         lengthCol[c] = r - 1;
         break;
@@ -104,6 +105,7 @@ function startPlayerMovement() {
   document.onkeydown = function (e) {
     switch (e.keyCode) {
       case 32: // When Space bar is pressed
+        e.preventDefault();
         if (currentPlayer == player1) {
           placeTile(player1R, player1C, "black", "player1");
           player1Tile.style.backgroundColor = BGColor;
@@ -242,37 +244,39 @@ function winOrReset(player) {
 }
 
 function victory(player) {
-  let result = document.getElementById("result");
+  let display = document.getElementById("display");
   if (player == "player1") {
-    result.innerHTML = "<h2>Black Wins!</h2><br>";
+    display.innerHTML = "<h2>Black Wins!</h2><br>";
   } else if (player == "player2") {
-    result.innerHTML = "<h2><span>Red</span> Wins!</h2><br>";
+    display.innerHTML = "<h2><span>Red</span> Wins!</h2><br>";
   }
-  document.getElementById("container").style.display = "block";
   return playAgainButton();
 }
 function tieCondition() {
   let red = document.getElementsByClassName("player1");
   let black = document.getElementsByClassName("player2");
   if (red.length + black.length == 6 * 7) {
-    let result = document.getElementById("result");
+    let result = document.getElementById("display");
     result.innerHTML = "<h2>It's a Tie!</h2>";
     playAgainButton();
   }
 }
+
+// Display button when called
 function playAgainButton() {
-  let playAgainButton = document.createElement("input");
+  let playAgainButton = document.createElement("button");
   playAgainButton.type = "button";
-  playAgainButton.id = "button";
-  playAgainButton.class = "button"; //
-  playAgainButton.value = "Play Again";
+  playAgainButton.class = "btn";
+  playAgainButton.innerHTML = "Play Again";
   playAgainButton.addEventListener("click", reset);
-  document.getElementById("result").appendChild(playAgainButton);
+  document.getElementById("display").appendChild(playAgainButton);
 }
 
+// Refreshes page when clicked
 function reset() {
-  let playAgainButton = document.getElementById("button");
+  let playAgainButton = document.getElementById("display");
   playAgainButton.addEventListener("click", window.location.reload());
 }
 
+// Allow player movement
 startPlayerMovement();
