@@ -1,0 +1,118 @@
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans&family=Pacifico&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Press+Start+2P&family=Shrikhand&display=swap");
+
+* {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+body {
+  text-align: center;
+  background-color: rgb(172, 198, 234);
+}
+
+table {
+  border-width: 1px;
+  margin: 0 auto 0 auto;
+  background: linear-gradient(
+    transparent,
+    transparent 85px,
+    rgb(110, 170, 215) 85px
+  );
+}
+
+td {
+  width: 80px;
+  height: 80px;
+  border: solid;
+  border-radius: 100px;
+  border-width: 3px;
+  background-color: white;
+}
+
+tr.ignoreCSSRow td {
+  border: none;
+  background-color: rgb(172, 198, 234);
+}
+
+h1 {
+  margin-top: 0%;
+  margin-bottom: 5px;
+  font-size: 60px;
+  text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.instructions {
+  margin: auto;
+  max-width: 70%;
+}
+
+h3 {
+  font-size: 24px;
+  margin-bottom: 0px;
+  text-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+li {
+  padding-bottom: 20px;
+  list-style: none;
+  font-size: 20px;
+  text-align: justify;
+}
+
+#id {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.button {
+  border: 10px;
+  border-style: solid;
+  border-radius: 5px;
+}
+
+span {
+  color: rgb(239, 88, 88);
+}
+
+button {
+  font-size: 24px;
+  padding: 10px;
+  width: 200px;
+  height: 50px;
+  border: 3px solid #000;
+  border-radius: 5px;
+  background-color: white;
+  cursor: pointer;
+  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+  background-color: rgb(239, 88, 88);
+}
+
+#red-text-title {
+  font-style: italic;
+  font-family: "Press Start 2P";
+  font-size: 60px;
+  color: rgb(239, 88, 88);
+}
+#container {
+  position: absolute;
+  z-index: 2;
+  top: 220px;
+  left: 400px;
+  width: 700px;
+  height: 560px;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: none;
+}
+#result {
+  position: absolute;
+  width: 400px;
+  height: 200px;
+  padding: 20px;
+  top: 80px;
+  left: 125px;
+  background-color: white;
+  text-align: center;
+}
